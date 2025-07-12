@@ -1,4 +1,5 @@
 from random import randint
+import requests
 import json
 
 
@@ -10,6 +11,7 @@ import json
 
 def updateFile(data):
     file_name = "youtube_data.json"
+
     try:
         with open(file_name, "w") as file:
             file.write(json.dumps(data))
@@ -124,6 +126,5 @@ while True:
         case "5":
             clearAllDetails()
         case "6":
-            # break
             print("--- Exit ---")
             exit()
