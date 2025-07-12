@@ -8,6 +8,17 @@ import json
 """
 
 
+def updateFile(data):
+    file_name = "youtube_data.json"
+    try:
+        with open(file_name, "w") as file:
+            file.write(json.dumps(data))
+    except FileNotFoundError as e:
+        print(f"error in updatin file {e}")
+    finally:
+        file.close()
+
+
 def listAllVideos(data):
     if len(data) == 0:
         print("No data added yet")
@@ -48,13 +59,7 @@ def addVideo(data):
 
     data.append(new_vide)
 
-    try:
-        with open("youtube_data.json", "w") as file:
-            file.write(json.dumps(data))
-    except Exception as e:
-        print(f"Some thing went wrong!!! {e}")
-    finally:
-        file.close()
+    updateFile(data)
 
 
 def delVideo(data):
@@ -67,13 +72,7 @@ def delVideo(data):
 
     data.remove(obj_idx)
 
-    try:
-        with open("youtube_data.json", "w") as file:
-            file.write(json.dumps(data))
-    except Exception as e:
-        print(f"Some thing went wrong!!! {e}")
-    finally:
-        file.close()
+    updateFile(data)
 
 
 def updateVideo(data):
@@ -84,23 +83,11 @@ def updateVideo(data):
         if video_id == obj["vId"]:
             obj["vTitle"] = video_title
 
-    try:
-        with open("youtube_data.json", "w") as file:
-            file.write(json.dumps(data))
-    except Exception as e:
-        print(f"Some thing went wrong!!! {e}")
-    finally:
-        file.close()
+    updateFile(data)
 
 
-def clearAllDetails(data):
-    try:
-        with open("youtube_data.json", "w") as file:
-            file.write(json.dumps([]))
-    except Exception as e:
-        print(f"Some thing went wrong!!! {e}")
-    finally:
-        file.close()
+def clearAllDetails():
+    updateFile([])
 
 
 def loadData():
@@ -135,7 +122,7 @@ while True:
         case "4":
             delVideo(youtube_data)
         case "5":
-            clearAllDetails(youtube_data)
+            clearAllDetails()
         case "6":
             # break
             print("--- Exit ---")
