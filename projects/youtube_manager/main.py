@@ -1,74 +1,121 @@
 from random import randint
+import json
+
 
 """
-video name: Best Python Playlist | 600k views,  total_time: 30min, channel_name: Chai aur code
+{vId: random, video name: Best Python Playlist | 600k views,  total_time: 30min, channel_name: Chai aur code}
 
 """
 
 
-def listAllVideos():
-    try:
-        with open("youtube_details.txt", "r") as file:
-            print(file.read())
-    except Exception as e:
-        print(f"Some thing went wrong!!! {e}")
-    finally:
-        file.close()
+def listAllVideos(data):
+    if len(data) == 0:
+        print("No data added yet")
+        return
+    else:
+        print("--- Your Youtube Details ---")
+
+    for obj in data:
+        print(
+            "Id: {} || Title: {} || Channel: {} || VTime: {} || Subscribed: {}".format(
+                obj["vId"],
+                obj["vTitle"],
+                obj["vTime"],
+                obj["channleName"],
+                obj["isSubscribed"],
+            )
+        )
 
 
-def addVideo():
+def addVideo(data):
     video_title = input("Enter the new video title: \n")
     video_time = input("Enter the total video time: \n")
     channle_name = input("Enter the channle name: \n")
+    is_subscribed = input("Did you subscribed this channel [y/n]")
+
+    if is_subscribed == "y" or "Y":
+        is_subscribed = True
+    else:
+        is_subscribed = False
+
+    new_vide = {
+        "vId": randint(1, 50),
+        "vTitle": video_title,
+        "vTime": video_time,
+        "channleName": channle_name,
+        "isSubscribed": is_subscribed,
+    }
+
+    data.append(new_vide)
 
     try:
-        with open("youtube_details.txt", "a") as file:
-            new_video = "\nvideoId: {} || Video title: {} || Total time: {}min || Channel name: {}".format(
-                randint(1, 30), video_title, video_time, channle_name
-            )
-
-            file.write(new_video)
+        with open("youtube_data.json", "w") as file:
+            file.write(json.dumps(data))
     except Exception as e:
         print(f"Some thing went wrong!!! {e}")
     finally:
         file.close()
 
 
-def delVideo():
-    pass
+def delVideo(data):
+    video_id = int(input("Enter the video id you want to update!! \n"))
+    obj_idx = None
 
+    for obj in data:
+        if video_id == obj["vId"]:
+            obj_idx = obj
 
-# def updateVideo():
-#     video_id = input("Enter the video id you want to update!! \n")
-#     file_content = []
-#     try:
-#         with open("youtube_details.txt", "r") as file:
+    data.remove(obj_idx)
 
-#             for line in file:
-#                 id = line.split(" || ")[0].split(":")
-#                 print("id: ", id)
-#                 if len(id) == 2:
-#                     actual_id = id.split(":")
-#                     print(actual_id)
-
-#                 file_content.append(line)
-#             print(file_content)
-
-#     except Exception as e:
-#         print(f"Error in updating vide {e}")
-
-
-def clearAllDetails():
     try:
-        with open("youtube_details.txt", "r") as file:
-            file.write("")
+        with open("youtube_data.json", "w") as file:
+            file.write(json.dumps(data))
     except Exception as e:
-        print(f"Error in cleaning file {e}")
+        print(f"Some thing went wrong!!! {e}")
+    finally:
+        file.close()
+
+
+def updateVideo(data):
+    video_id = int(input("Enter the video id you want to update!! \n"))
+    video_title = input("Enter the new video title that you wana change: \n")
+
+    for obj in data:
+        if video_id == obj["vId"]:
+            obj["vTitle"] = video_title
+
+    try:
+        with open("youtube_data.json", "w") as file:
+            file.write(json.dumps(data))
+    except Exception as e:
+        print(f"Some thing went wrong!!! {e}")
+    finally:
+        file.close()
+
+
+def clearAllDetails(data):
+    try:
+        with open("youtube_data.json", "w") as file:
+            file.write(json.dumps([]))
+    except Exception as e:
+        print(f"Some thing went wrong!!! {e}")
+    finally:
+        file.close()
+
+
+def loadData():
+    try:
+        with open("youtube_data.json", "r") as file:
+            return json.loads(file.read() or "[]")
+    except Exception as e:
+        print(f"error while loading data {e}")
 
 
 while True:
+    youtube_data = loadData()
+    # print("data: {}".format(youtube_data))
     print(" \n --- Youtube Manager!!!, pick any on of them --- \n")
-    print("1: List all youtube vides !!")
+    print("1: List all youtube videos !!")
     print("2: Add a new video !!")
     print("3: Update a video !!")
     print("4: Delete a video !!")
@@ -79,16 +126,16 @@ while True:
 
     match choice:
         case "1":
-            listAllVideos()
+            listAllVideos(youtube_data)
         case "2":
-            addVideo()
+            addVideo(youtube_data)
         case "3":
-            # updateVideo()
+            updateVideo(youtube_data)
             pass
         case "4":
-            print("delete")
+            delVideo(youtube_data)
         case "5":
-            clearAllDetails()
+            clearAllDetails(youtube_data)
         case "6":
             # break
             print("--- Exit ---")
