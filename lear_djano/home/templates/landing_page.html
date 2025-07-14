@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Django Beginner</title>
+    <style>
+      /* Django-themed colors */
+      :root {
+        --django-green: #092e20;
+        --django-light-green: #44b78b;
+        --django-white: #f8f9fa;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--django-white);
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 1.6;
+      }
+
+      .container {
+        background: white;
+        border-radius: 8px;
+        padding: 2.5rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        margin: 2rem;
+        border-top: 5px solid var(--django-light-green);
+      }
+
+      h1 {
+        color: var(--django-green);
+        margin-top: 0;
+        font-size: 2.2rem;
+        position: relative;
+        display: inline-block;
+      }
+
+      h1:after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: var(--django-light-green);
+      }
+
+      .django-icon {
+        color: var(--django-light-green);
+        font-size: 1.5rem;
+        margin-right: 10px;
+      }
+
+      .features {
+        margin: 2rem 0;
+      }
+
+      .feature-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+      }
+
+      .feature-icon {
+        color: var(--django-light-green);
+        margin-right: 15px;
+        font-size: 1.2rem;
+        margin-top: 3px;
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--django-green);
+        color: white;
+        padding: 0.8rem 1.8rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: 2px solid var(--django-green);
+      }
+
+      .btn:hover {
+        background-color: transparent;
+        color: var(--django-green);
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        color: var(--django-green);
+        margin-left: 1rem;
+      }
+
+      .btn-outline:hover {
+        background-color: var(--django-green);
+        color: white;
+      }
+
+      .code-example {
+        background: #f5f5f5;
+        padding: 1rem;
+        border-radius: 4px;
+        font-family: "Courier New", monospace;
+        margin: 1.5rem 0;
+        overflow-x: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1><span class="django-icon">✓</span> Getting Started with Django</h1>
+
+      <p>
+        Welcome to your Django learning journey! This powerful Python web
+        framework will help you build amazing web applications quickly and
+        securely.
+      </p>
+
+      <div class="code-example">
+        # Your first Django view<br />
+        from django.http import HttpResponse<br /><br />
+
+        def hello_world(request):<br />
+        &nbsp;&nbsp;&nbsp;&nbsp;return HttpResponse("Hello, Django World!")
+      </div>
+
+  </body>
+</html>
