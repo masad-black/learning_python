@@ -18,11 +18,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from home.views import index, get_heading, home_details
+from home.views import index, details, results, vote
 
 urlpatterns = [
     path("", index),
-    path("get-heading/", get_heading),
-    path("home-details/", home_details),
+    # path("home-details/", home_details),
+    # path("get-heading/", get_heading),
+    path("details/<int:question_id>/", details),
+    path("<int:question_id>/results/", results),
+    path("details/<int:question_id>/", details),
     path("admin/", admin.site.urls),
 ]

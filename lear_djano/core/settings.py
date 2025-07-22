@@ -30,13 +30,17 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# these are the sub app's of the main project!!
 INSTALLED_APPS = [
-    "django.contrib.admin",
+    "django.contrib.admin",  # this is the admin site
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # this is for the custome configuration's of the sub app
+    # "home.apps.HomeConfig",
+    # this is just using the default config
     "home",
 ]
 

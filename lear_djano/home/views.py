@@ -3,33 +3,33 @@ from django.http import HttpResponse, HttpRequest, JsonResponse
 
 # Create your views here.
 
+
+def details(request, question_id):
+    return HttpResponse("You are looking at the question id: {}".format(question_id))
+
+
+def results(request, question_id):
+    return HttpResponse(
+        "You are looking at the results of question id: {}".format(question_id)
+    )
+
+
+def vote(request, question_id):
+    return HttpResponse("You are voting on question id: {}".format(question_id))
+
+
 # * these are the function based controllers!!!
 
 
-# def index(request):
-#     print("----- Start -----")
-#     print("type of request: ", request.method)
-#     print("tell the full page path: ", request.path)
-#     print("tell what protocol the req is comming :", request.scheme)
-#     print("raw data: ", request.body)
-#     print("encoding: ", request.encoding)
-#     print(request.content_type)
-#     # print(request.META)
-#     # print(request.headers)
-#     print(request.session)
-#     print(request.get_host())
-#     print(request.build_absolute_uri())
-
-
-#     return HttpResponse("Hello this is my first response, from Django!!!")
-#     # return HttpResponseNotFound("Not founded")
+def index(request):
+    return render(request, "landing_page.html")
 
 
 """
 Learnong about the djanjo request and resposne
 """
 
-
+"""
 def index(request):
     print("----- Start -----")
     # * Request object
@@ -75,22 +75,24 @@ def index(request):
     # return HttpResponse("<h1>this is the main heading </h1>").status_code = 300
     # return render(request, "landing_page.html")
 
-
-def get_heading(request):
-    return HttpResponse("""
-            <h1>this is the heading!! </h1>
-        """)
+"""
 
 
-def home_details(request):
-    # print("home details view")
-    # print(request.path)
-    data = [
-        {"name": "Toji", "age": 20, "gender": "Male", "degree": "CS"},
-        {"name": "Naruto", "age": 10, "gender": "Male", "degree": "CS"},
-        {"name": "Itachi", "age": 25, "gender": "Male", "degree": "Killer"},
-        {"name": "Kouzwa", "age": 20, "gender": "Female", "degree": "MBBS"},
-        {"name": "Nana", "age": 30, "gender": "Female", "degree": "BBA"},
-    ]
+# def get_heading(request):
+#     return HttpResponse("""
+#             <h1>this is the heading!! </h1>
+#         """)
 
-    return render(request, "info.html", context={"data": data})
+
+# def home_details(request):
+#     # print("home details view")
+#     # print(request.path)
+#     data = [
+#         {"name": "Toji", "age": 20, "gender": "Male", "degree": "CS"},
+#         {"name": "Naruto", "age": 10, "gender": "Male", "degree": "CS"},
+#         {"name": "Itachi", "age": 25, "gender": "Male", "degree": "Killer"},
+#         {"name": "Kouzwa", "age": 20, "gender": "Female", "degree": "MBBS"},
+#         {"name": "Nana", "age": 30, "gender": "Female", "degree": "BBA"},
+#     ]
+
+#     return render(request, "info.html", context={"data": data})
